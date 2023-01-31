@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  symfony_web:
+    build:
+      args:
+        - APP_ENV=prod
+    volumes:
+      - ./server/apache2/default-ssl-prod.conf:/etc/apache2/sites-available/default-ssl.conf
+      - ./server/.env.prod:/var/www/html/.env
+      
+  symfony_db:
+    env_file:
+      - './server/.env.prod'
+    
+volumes:
+  pgdata:
