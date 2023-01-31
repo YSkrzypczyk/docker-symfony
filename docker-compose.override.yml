@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  symfony_web:
+    build:
+      args:
+        - APP_ENV=dev
+    volumes:
+      - ./server/ssl/mycert.crt:/etc/ssl/certs/mycert.crt
+      - ./server/ssl/mycert.key:/etc/ssl/private/mycert.key
+      - ./server/apache2/default-ssl.conf:/etc/apache2/sites-available/default-ssl.conf
+      - ./server/.env:/var/www/html/.env
+
+  symfony_db:
+    env_file:
+      - './server/.env'
+  
+  symfony_adminer:
+    container_name: symfony_adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+
+volumes:
+  pgdata:

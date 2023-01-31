@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  symfony_web:
+    container_name: symfony_web
+    environment:
+        - DOCKER_BUILDKIT=1
+        - COMPOSE_DOCKER_CLI_BUILD=1
+    depends_on:
+      - symfony_db
+    ports :
+      - "80:80"
+      - "443:443"
+    volumes:
+     - ./:/var/www/html/
+     - ./server/apache2/apache2.conf:/etc/apache2/apache2.conf
+     - ./server/php/php.ini:/usr/local/etc/php/php.ini
+     - ./server/apache2/000-default.conf:/etc/apache2/sites-available/000-default.conf
+
+  symfony_db:
+    container_name: symfony_db
+    image: postgres
+    restart: always
+    ports :
+      - "5433:5433"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+
+volumes:
+  pgdata:
