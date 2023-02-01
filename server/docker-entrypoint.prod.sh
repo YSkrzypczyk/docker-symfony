@@ -11,6 +11,8 @@ fi
 npm update && npm run build
 
 #a2ensite default-ssl
+service apache2 reload
+
 
 /etc/init.d/apache2 start
 
