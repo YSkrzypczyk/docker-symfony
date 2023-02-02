@@ -26,6 +26,8 @@ fi
 
 a2ensite default-ssl
 
+chown -R www-data:www-data /var/www/html/public
+
 /etc/init.d/apache2 start
 
 php bin/console cache:clear
