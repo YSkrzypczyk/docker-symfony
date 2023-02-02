@@ -13,8 +13,6 @@ npm update && npm run build
 chown -R www-data:www-data /var/www/html/public
 
 #a2ensite default-ssl
-service apache2 reload
-
 
 /etc/init.d/apache2 start
 
